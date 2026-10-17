@@ -29,3 +29,23 @@ export const userDeleteAll = async () => {
 
     return user.deletedCount;
 }
+
+export const userUpdateAllDetails = async (id, data) => {
+    const user = await User.findByIdAndUpdate(id, data, {
+        returnDocument: 'after'
+    });
+
+    return user;
+}
+
+export const signUp = async (data) => {
+    const user = await User.create(data);
+    return user;
+}
+export const signIn = async (data) => {
+    
+    const user = await User.findOne(data);
+    console.log("data",user);
+
+    return user;
+}

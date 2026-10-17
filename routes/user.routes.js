@@ -1,5 +1,5 @@
 import express from 'express';
-import { users, userById, createUser, userDeleteById, allUserDelete } from '../controllers/user.controller.js'
+import { users, userById, createUser, userDeleteById, allUserDelete, updateUser, signUpController, signInController } from '../controllers/user.controller.js'
 import { authMiddleware } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
@@ -16,10 +16,14 @@ const router = express.Router();
 // });
 
 // code with controller
-router.get('/', users);
+router.get('/',authMiddleware, users);
 router.get('/:id', userById);
 router.delete('/:id', userDeleteById);
 router.delete('/', allUserDelete);
+router.put('/:id', updateUser);
+router.patch('/:id', updateUser);
 router.post('/', authMiddleware, createUser);
+router.post('/signup', signUpController);
+router.post('/signin', signInController);
 
 export default router;
